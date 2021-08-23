@@ -50,8 +50,8 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 https://metamask.io/
 
 #### 로컬 네트워크 활용 및 실습
-1. 가나슈 구동 -> 가나슈를 사용하면 PC가 마치 이더리움 네트워크인 것처럼 개발 가능
-###### 로컬 테스트넷 구동 -> 프라이빗 로컬 네트워크가 구성되었다.
+1. 가나슈 구동 : 가나슈를 사용하면 PC가 마치 이더리움 네트워크인 것처럼 개발 가능
+- 로컬 테스트넷 구동 : 프라이빗 로컬 네트워크가 구성되었다.
 ```
 ganache-cli -d -m -p 7545 -a 5
 ```
@@ -59,16 +59,28 @@ ganache-cli -d -m -p 7545 -a 5
 - -p(--port) 포트 지정 (default 8545)
 - -a(--account) 구동 시 생성할 계정 수 (default 10)
 
-######명령어 옵션 확인
+###### 명령어 옵션 확인
 ```
 ganache-cli --help
 ```
 
-2. Geth로 네트워크에 접속
-###### geth 명령어로 가나슈 테스트넷에 접속 with 새 명령 프롬포트
+2. Geth로 네트워크에 접속 -> geth 명령어로 가나슈 테스트넷에 접속 with 새 명령 프롬포트
 ```
 > cd src\github.com\ethereum\go-ethereum
+> geth attach http://localhost:7545
 ```
+
+3. 네트워크 기본 사항 확인
+###### 연결성 확인 Connectivity Check
+```
+> net.listening
+> net.peerCount
+```
+###### 계정 목록 확인
+```
+eth.accounts
+```
+###### 계정 보유 잔액 확인
 
 
 
