@@ -6,7 +6,7 @@
 >퍼블릭 네트워크 : 전세계 사람들이 동일한 데이터를 유지하고 있는 네트워크 (데이터가 불가역적으로 저장)
 >	> 메인넷
 >	> 테스트넷
->	>	> ex)_롭슨 Ropsten_, 코반 Kovan, 링키비 Rinkeby, 고얼리 Goerli
+>	>	> ex) _롭슨 Ropsten_, 코반 Kovan, 링키비 Rinkeby, 고얼리 Goerli
 
 #### 이더리움 네트워크 개념도
 ![networkconcept](md-images/networkconcept.png)
