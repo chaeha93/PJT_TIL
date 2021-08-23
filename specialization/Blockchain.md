@@ -8,5 +8,5 @@
   - 테스트넷 ex) _롭슨 Ropsten_, 코반 Kovan, 링키비 Rinkeby, 고얼리 Goerli
 
 #### 이더리움 네트워크 개념도
-![networkconcept](md-images/networkconcept.png)
+![networkconcept](md-images/networkconcept.png)  
 기본적으로 블록체인은 다수의 노드로 구성되는 것이 원칙 (로컬 PC는 노드가 한 개)
