@@ -25,17 +25,21 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 2. 사전 필요 요소 설치 with Windows PowerShell 관리자 권한
 ```
 > choco install git -y
-> choco install golang -y // geth가 go 언어로 되어있으므로 설치해야함
+> choco install golang -y
+# geth가 go 언어로 되어있으므로 설치해야함
 > choco install mingw -y
-> choco install nodejs-lts // node.js 설치
+> choco install nodejs-lts 
+# node.js 설치
 ```
 
 3. Geth 설치 with 명령 프롬포트
 ```
 > mkdir src\github.com\ethereum
-> git clone https://github.com/ethereum/go-ethereum --branch v1.9.24 src\github.com\ethereum\go-ethereum // go-ethereum == geth
+> git clone https://github.com/ethereum/go-ethereum --branch v1.9.24 src\github.com\ethereum\go-ethereum
+# go-ethereum == geth
 > cd src\github.com\ethereum\go-ethereum
-> go get -u -v golang.org/x/net/context // 컴파일
+> go get -u -v golang.org/x/net/context
+# 컴파일
 > go install -v ./cmd/...
 > geth version
 ```
@@ -78,15 +82,37 @@ ganache-cli --help
 ```
 ###### 계정 목록 확인
 ```
-eth.accounts
+> eth.accounts
 ```
 ###### 계정 보유 잔액 확인
+```
+> web3.fromWei(eth.getBalance(eth.accounts[0]))
+```
+###### 체인 ID 확인
+```
+> eth.chainId()
+```
 
+4. 네트워크 정보 입력  
+메타마스크(크롬) -> 맞춤형 RPC에서 정보 입력
 
+5. 메타마스크 계정으로 이더 전송
+###### geth consol로 진행
+```
+> tx = {from: "가나슈 제공 계정 중 하나", to: "메타마스크 계정", value: 1e18}
+# tx = {from: "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1", to: "0x8419957CAFDBaEDbb05d8a689BE931AF85c3431b", value: 1e18}
+> eth.sendTransaction(tx)
+# 이 트랜잭션을 보내라!
+```
+-> METAMASK의 지갑에서 송금이 된 것을 확인할 수 있다.
 
+6. from 주소 잔액 확인
+```
+> eth.getBalance(eth.accounts[0])
+```
+- (value + 소요 가스(수수료))만큼 차감 
 
-
-
-
-
-
+7. 단위 환산
+```
+> web3.fromWei(eth.getBalance(eth.accounts[0]), "ether")
+```
