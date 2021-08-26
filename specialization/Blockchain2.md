@@ -30,7 +30,7 @@
 - ENDPOINT를 Ropsten으로 변경 : Infura Project에서 생성된 ENDPOINT는 고정된 값으로 이후 과정에서 이를 이용하기 위해 URL을 기록해둘 것을 권장
 # https://ropsten.infura.io/v3/5c293307f9444b55a3f606f73d580ae8
 2. 노드 서비스 이용하기
-- 노드 클라이언트 조회 with cmd
+- 노드 클라이언트 조회 with cmd  
 ![node](md-images/node.JPG)  
 
 #### 노드로 직접 참여하기
