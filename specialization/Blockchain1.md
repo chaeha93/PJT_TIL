@@ -204,11 +204,14 @@ https://faucet.ropsten.be/
 # geth console 내부
 > net.listening
 > eth.syncing
+> eth.blockNumber
 > net.peerCount
 > eth.syncing.currentBlock / eth.syncing.highestBlock * 100
+# 동기화 진행도를 볼 수 있음
 ```
 ###### 동기화 완료 확인
 - 이더 잔고 확인
 ```
+> web3.fromWei(eth.getBalance(eth.accounts[0]))
 > eth.getBalance(eth.accounts[0])
 ```
