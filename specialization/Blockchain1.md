@@ -1,21 +1,21 @@
-##블록체인 네트워크의 이해 : 프라이빗 네트워크 실습으로 이더리움 네트워크 시작하기
+## 블록체인 네트워크의 이해 : 프라이빗 네트워크 실습으로 이더리움 네트워크 시작하기
 
-####이더리움(ethereum)이란...?
+#### 이더리움(ethereum)이란...?
 이더리움은 블록체인 기술을 기반으로 스마트 계약 기능을 구현하기 위한 분산 컴퓨팅 플랫폼이자 운영체제
 
-####이더리움 블록체인 네트워크의 분류
+#### 이더리움 블록체인 네트워크의 분류
 - 프라이빗 네트워크 : 로컬 PC 또는 친구들끼리 이더리움을 구동하는 것을 의미 (마음껏 채굴, 배포 가능)  
 - 퍼블릭 네트워크 : 전세계 사람들이 동일한 데이터를 유지하고 있는 네트워크 (데이터가 불가역적으로 저장)  
   - 메인넷  
   - 테스트넷 ex) _롭슨 Ropsten_, 코반 Kovan, 링키비 Rinkeby, 고얼리 Goerli
 
-####이더리움 네트워크 개념도
+#### 이더리움 네트워크 개념도
 ![networkconcept](md-images/networkconcept.png)  
 - 기본적으로 블록체인은 다수의 노드로 구성되는 것이 원칙 (로컬 PC는 노드가 한 개)  
 - 노드는 다양한 데이터를 동기화시켜서 블록의 형태로 가지고 있음
 - 이더리움에 참여하기 위해서는 이더리움 클라이언트를 활용해야함 -> geth를 많이 사용
 
-####환경설정
+#### 환경설정
 1. Chocolatey 설치 with Windows PowerShell 관리자 권한
 https://chocolatey.org/install
 ```
@@ -53,9 +53,9 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 5. 지갑 프로그램(Metamask) 설치 with 크롬 확장 프로그램
 https://metamask.io/
 
-####로컬 네트워크 활용 및 실습
+#### 로컬 네트워크 활용 및 실습
 1. 가나슈 구동 : 가나슈를 사용하면 PC가 마치 이더리움 네트워크인 것처럼 개발 가능
-######로컬 테스트넷 구동 : 프라이빗 로컬 네트워크가 구성되었다.
+###### 로컬 테스트넷 구동 : 프라이빗 로컬 네트워크가 구성되었다.
 ```
 > ganache-cli -d -m -p 7545 -a 5
 ```
@@ -63,7 +63,7 @@ https://metamask.io/
 - -p(--port) 포트 지정 (default 8545)
 - -a(--account) 구동 시 생성할 계정 수 (default 10)
 
-######명령어 옵션 확인
+###### 명령어 옵션 확인
 ```
 > ganache-cli --help
 ```
@@ -75,20 +75,20 @@ https://metamask.io/
 ```
 
 3. 네트워크 기본 사항 확인
-######연결성 확인 Connectivity Check
+###### 연결성 확인 Connectivity Check
 ```
 > net.listening
 > net.peerCount
 ```
-######계정 목록 확인
+###### 계정 목록 확인
 ```
 > eth.accounts
 ```
-######계정 보유 잔액 확인
+###### 계정 보유 잔액 확인
 ```
 > web3.fromWei(eth.getBalance(eth.accounts[0]))
 ```
-######체인 ID 확인
+###### 체인 ID 확인
 ```
 > eth.chainId()
 ```
@@ -97,7 +97,7 @@ https://metamask.io/
 메타마스크(크롬) -> 맞춤형 RPC에서 정보 입력
 
 5. 메타마스크 계정으로 이더 전송
-######geth consol로 진행
+###### geth consol로 진행
 ```
 > tx = {from: "가나슈 제공 계정 중 하나", to: "메타마스크 계정", value: 1e18}
 # tx = {from: "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1", to: "0x8419957CAFDBaEDbb05d8a689BE931AF85c3431b", value: 1e18}
@@ -118,8 +118,8 @@ https://metamask.io/
 ```
 <hr>  
 
-##HW1 : geth console에서 데이터를 담은 트랜잭션 생성하기
-#####사전 준비
+## HW1 : geth console에서 데이터를 담은 트랜잭션 생성하기
+##### 사전 준비
 - 계정 목록 확인
 ```
 > eth.accounts
@@ -129,7 +129,7 @@ https://metamask.io/
 > eth.getBalance(ACCOUNT)
 # eth.getBalance(eth.accounts[0])
 ```
-#####트랜잭션 생성
+##### 트랜잭션 생성
 - 트랜잭션은 이더리움의 상태(World State)를 변경시키는 역할
 - 트랜잭션 메시지 생성
 ```
@@ -145,14 +145,14 @@ https://metamask.io/
 - from : 보내는 주소 계정 (optional)
 - to : 받는 주소
 - data : 메시지를 담을 수 있는 데이터 필드 (optional,hexadecimal character)
-#####트랜잭션 전송
+##### 트랜잭션 전송
 ```
 > tx_hash = eth.sendTransaction(tx)
 ```
 - sendTransaction API를 통해 트랜잭션 메시지의 signature(from 주소의 개인키를 이용한 전자 서명 생성)가 생성되고 블록체인 네트워크로 전송
 - 트랜잭션 전송 결과로 트랜잭션 고유의 해시 값이 반환
 - 이 값을 통해 트랜잭션 상태를 조회할 수 있음
-#####트랜잭션 조회
+##### 트랜잭션 조회
 - 트랜잭션 조회
 ```
 > tx_detail = eth.getTransaction(tx_hash)
@@ -163,7 +163,7 @@ https://metamask.io/
 >	- gas : 트랜잭션이 소요할 수 있는 최대 가스 카운트 (gas limit)
 >	- nonce : 보낸 주소(from)로부터 생성된 트랜잭션의 순차적 수 (PoW의 nonce와 구분하기 위해 Transaction nonce라고도 함.)
 >	- v, r, s : ECDSA(Ellipstic Curve Digital Signature)의 구성요소. 전자 서명을 검증하기 위한 값, 전자 서명을 생성하기 위한 입력 값 정보를 포함
-#####트랜잭션 결과 확인
+##### 트랜잭션 결과 확인
 - 트랜잭션 input 필드 검사
 ```
 > web3.toAscii(tx_detail.input)
@@ -177,24 +177,24 @@ https://metamask.io/
 > web3.fromWei(balance, "ether")
 ```  
 
-##HW2 : essay  
+## HW2 : essay  
 
-##HW3 : Ropsten 테스트넷 동기화
-######동기화 폴더 생성
-######계정 생성
+## HW3 : Ropsten 테스트넷 동기화
+###### 동기화 폴더 생성
+###### 계정 생성
 - Geth 명령어로 계정 생성
 ```
 > geth --datadir .\datadir\ account new
 ```
-######Ropsten Faucet에서 이더받기  
+###### Ropsten Faucet에서 이더받기  
 https://faucet.ropsten.be/
-######동기화를 위한 포트 허용
+###### 동기화를 위한 포트 허용
 - 방화벽 열기 : tcp 30303, udp 30303 
-######롭슨 테스트넷에 참여하기
+###### 롭슨 테스트넷에 참여하기
 ```
 > geth --ropsten --datadir C:\Users\multicampus\workspace\datadir --http --http.addr 0.0.0.0 --http.api eth,net,web3,personal --http.corsdomain * --allow-insecure-unlock
 ```
-######동기화 상태 확인
+###### 동기화 상태 확인
 - Geth 접속
 ```
 > geth attach http://localhost:8545
@@ -207,7 +207,7 @@ https://faucet.ropsten.be/
 > net.peerCount
 > eth.syncing.currentBlock / eth.syncing.highestBlock * 100
 ```
-######동기화 완료 확인
+###### 동기화 완료 확인
 - 이더 잔고 확인
 ```
 > eth.getBalance(eth.accounts[0])
