@@ -197,6 +197,7 @@ https://faucet.ropsten.be/
 ###### 동기화 상태 확인
 - Geth 접속
 ```
+> cd C:\Users\multicampus\workspace\datadir
 > geth attach http://localhost:8545
 ```
 - 상태 확인 명령

@@ -30,4 +30,9 @@ git checkout master
 git branch main master -f
 git checkout main
 git push origin main -f
+```  
+
+## git push가 안되는 경우 (fatal:refusing to merge unrelated histories)
+```
+git pull origin 브런치명 --allow-unrelated-histories
 ```
