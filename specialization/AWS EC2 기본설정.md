@@ -1,7 +1,7 @@
 ## AWS EC2 기본설정
 
 1. Java 설치
-````
+```
 $ sudo apt-get install openjdk-8-jdk
 $ java -version
 ```
