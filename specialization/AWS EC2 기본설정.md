@@ -6,7 +6,7 @@ $ sudo apt-get install openjdk-8-jdk
 $ java -version
 ```
 
-2. Docker 설치
+2. Docker 설치  
 참고 : https://docs.docker.com/engine/install/ubuntu/
 ```
 # 이전 버전 제거
