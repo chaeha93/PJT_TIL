@@ -74,7 +74,7 @@ $ docker images
 $ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=ssafy --name surlock mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 ```
 
-5. Docker를 통한 Nginx 설치
+5. Docker를 통한 Nginx 설치  
 (1) Nginx 최신버전 설치 명령어
 ```
 $ sudo docker pull nginx:latest
@@ -84,7 +84,7 @@ $ sudo docker pull nginx:latest
 $ docker run --name nginx-test -v /home/mint/share/nginx/html:/usr/share/nginx/html:ro -d -p 80:80 nginx
 ```
 
-6. Docker를 통한 Jenkins 설치
+6. Docker를 통한 Jenkins 설치  
 (1) Jenkins 도커 이미지 다운로드
 ```
 $ docker pull jenkins/jenkins
