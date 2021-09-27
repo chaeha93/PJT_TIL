@@ -1,4 +1,4 @@
-## AWS EC2 기본설정
+## AWS EC2 설정
 
 1. Java 설치
 ```
@@ -61,39 +61,39 @@ $ docker-compose --version
 
 4.  Docker를 통한 MySQL 5.7 버전 설치  
 참고 : http://jmlim.github.io/docker/2019/07/30/docker-mysql-setup/  
-- MySQL Docker 이미지 다운로드
+(1) MySQL Docker 이미지 다운로드
 ```
 $ docker pull mysql:5.7
-```  
-- 도커 이미지 확인
+```
+(2) 도커 이미지 확인
 ```
 $ docker images
-```  
-- MySQL Docker 컨테이너 생성 및 실행
+```
+(3) MySQL Docker 컨테이너 생성 및 실행
 ``` 
 $ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=ssafy --name surlock mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 ```
 
 5. Docker를 통한 Nginx 설치  
-- Nginx 최신버전 설치 명령어
+(1) Nginx 최신버전 설치 명령어
 ```
 $ sudo docker pull nginx:latest
-```  
-- 실행
+```
+(2) 실행
 ```
 $ docker run --name nginx-test -v /home/mint/share/nginx/html:/usr/share/nginx/html:ro -d -p 80:80 nginx
 ```
 
 6. Docker를 통한 Jenkins 설치  
-- Jenkins 도커 이미지 다운로드
+(1) Jenkins 도커 이미지 다운로드
 ```
 $ docker pull jenkins/jenkins
 ```  
-- Jenkins 컨테이너 실행
+(2) Jenkins 컨테이너 실행
 ```
 $ docker run -d -p 8000:8080 --restart=always -v /var/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --name jenkins -u root jenkins/jenkins
-```  
-- Jenkins 비밀번호 확인
+```
+(3) Jenkins 비밀번호 확인
 ```
 $ docker logs [CONTAINER_NAME]
 # docker logs jenkins
