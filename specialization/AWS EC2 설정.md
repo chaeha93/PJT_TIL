@@ -3,11 +3,8 @@
 1. Java 설치
 ```
 $ sudo apt-get install openjdk-8-jdk
-$ sudo add-apt-repository ppa:webupd8team/java # 패키지가 없으니 패키지 서버를 추가하고 다시 설치(?)
-$ sudo apt-get update
-$ sudo apt-get install oracle-java8-installer
+## $ sudo add-apt-repository ppa:webupd8team/java # 패키지가 없으니 패키지 서버를 추가하고 다시 설치(?)
 $ java -version
-# javac -version
 ```  
 
 2. Maven 설치
@@ -74,7 +71,7 @@ $ docker images
 $ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=ssafy --name surlock mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 ```
 
-5. Docker를 통한 Nginx 설치  
+5. Docker를 통한 Nginx 설치 (하지 않음)
 (1) Nginx 최신버전 설치 명령어
 ```
 $ sudo docker pull nginx:latest
@@ -125,3 +122,30 @@ chmod 777 mvnw
 chmod 777 dockerbuild.sh
 sh dockerbuild.sh
 ```  
+
+8. EC2 서버 내 Nginx 설치 및 실행
+(0) Nginx 삭제
+```
+$ sudo apt-get remove nginx
+```  
+(1) Nginx 설치
+```
+$ sudo apt-get update
+$ sudo apt-get install nginx
+```  
+(2) Nginx 세팅
+```
+# 설정 파일의 위치 찾기
+$ sudo find / -name nginx.conf
+$ sudo vi nginx.conf
+# 
+
+```  
+(3) Nginx 실행
+```
+$ sudo service nginx start
+```
+
+
+/var/jenkins/workspace/Sur-Lock/frontend/build
+systemctl status nginx

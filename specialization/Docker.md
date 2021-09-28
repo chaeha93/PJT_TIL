@@ -13,6 +13,8 @@ $ docker container rm {컨테이너ID 앞 3자리}
 $ docker stop $(docker ps -a -q)
 # 모든 컨테이너 삭제
 $ docker rm $(docker ps -a -q)
+# 컨테이너 로그 확인
+docker logs {container name}
 ``` 
   
 - Docker image
@@ -21,4 +23,4 @@ $ docker rm $(docker ps -a -q)
 $ docker images
 # 이미지 삭제
 $ docker rmi {이미지 id}
-```
+```  
