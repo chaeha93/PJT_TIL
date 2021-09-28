@@ -1,15 +1,15 @@
 ## Docker & Jenkins를 이용한 배포
-1. Docker를 통한 Jenkins 설치  
-1) Jenkins 도커 이미지 다운로드
+###### Docker를 통한 Jenkins 설치  
+1. Jenkins 도커 이미지 다운로드
 ```
 $ docker pull jenkins/jenkins
 ```  
-2) Jenkins 컨테이너 실행
+2. Jenkins 컨테이너 실행
 ```
 $ docker run -d -p 8000:8080 --restart=always -v /var/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --name jenkins -u root jenkins/jenkins
 # -v /var/jenkins:/jenkins:/var/jenkins_home -> 리눅스의 /var/jenkins_home을 local의 /var/jenkins와 공유한다. (볼륨을 준다고 표현) 
 ```
-(3) Jenkins 비밀번호 확인
+3. Jenkins 비밀번호 확인
 ```
 $ docker logs [CONTAINER_NAME]
 # docker logs jenkins
