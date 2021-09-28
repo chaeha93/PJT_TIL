@@ -71,7 +71,7 @@ $ docker images
 $ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=ssafy --name surlock mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 ```
 
-5. Docker를 통한 Nginx 설치 (하지 않음)
+5. Docker를 통한 Nginx 설치 (하지 않음)  
 (1) Nginx 최신버전 설치 명령어
 ```
 $ sudo docker pull nginx:latest
