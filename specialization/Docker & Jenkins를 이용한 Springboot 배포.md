@@ -21,7 +21,7 @@ $ docker logs [CONTAINER_NAME]
 1. Settings -> webhooks -> Addwebhook 클릭
 2. Webhooks/Manage webhook Settings  
 - Payload URL 작성
-ex) http://j5a501.p.ssafy.io:8000/github-webhook/ 
+ex) http://j5a501.p.ssafy.io:8000/github-webhook/   
  ** 반드시 주소 뒤 '/github-webhook/'을 작성!!
 - Content Type : application/json
 - Which events would you like to trigger this webhook? : 상황에 맞게 클릭
