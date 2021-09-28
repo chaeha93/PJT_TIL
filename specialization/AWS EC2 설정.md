@@ -135,17 +135,19 @@ $ sudo apt-get install nginx
 ```  
 (2) Nginx 세팅
 ```
-# 설정 파일의 위치 찾기
-$ sudo find / -name nginx.conf
-$ sudo vi nginx.conf
-# 
-
+$ cd /etc/nginx/sites-available
+$ sudo vi default 
+server {
+  listen 80;
+  location / {
+    root /var/jenkins/workspace/Sur-Lock/frontend/build;
+    index  index.html index.htm;
+    try_files $uri /index.html;
+  }
+}
+# 다른 내용 반드시 주석하기!
 ```  
 (3) Nginx 실행
 ```
 $ sudo service nginx start
 ```
-
-
-/var/jenkins/workspace/Sur-Lock/frontend/build
-systemctl status nginx
