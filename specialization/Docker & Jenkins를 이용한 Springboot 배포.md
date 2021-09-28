@@ -30,19 +30,15 @@ ex) http://j5a501.p.ssafy.io:8000/github-webhook/
 
 ###### Jenkins   
 1. 확인한 비밀번호로 접속 및 계정 생성  
-2. Jenkins 관리 -> 플러그인 관리 -> Docker Pipeline, Docker plugin, npm 설치  
-3. Jenkins 관리 -> Global Tool Configuration -> NodeJS v14.17.6  
-4. 새로운 item -> Freestyle project 생성  
-5. 소스 코드 관리에서 Git 선택 후 Repository URL 작성과 Credentials Add 후 선택  
-6. 빌드 유발 - GitHub hook trigger for GITScm polling 선택  
-7. 빌드 환경 - Provide Node & npm bin /folder to PATH 선택 후 Node 버전 선택  
-8. Build - Excute shell  
+2. Jenkins 관리 -> 플러그인 관리 -> Docker Pipeline, Docker plugin 설치  
+3. 새로운 item -> Freestyle project 생성  
+4. 소스 코드 관리에서 Git 선택 후 Repository URL 작성과 Github 계정 Credentials Add 후 선택  
+5. 빌드 유발 - GitHub hook trigger for GITScm polling 선택  
+6. Build - Excute shell  
 ```
 cd backend
 chmod 777 mvnw
 ./mvnw clean package
-chmod 777 dockerbuild.sh
-sh dockerbuild.sh
 ```  
 
 ### Docker 자동 배포 (도커라이징)
