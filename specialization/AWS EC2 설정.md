@@ -97,7 +97,7 @@ $ docker logs [CONTAINER_NAME]
 ```  
 
 ### Jenkins-Github Webhook  (Github에 변동이 발생하면 자동 빌드)
-###### GitHub  
+##### GitHub  
 1. Settings -> webhooks -> Addwebhook 클릭
 2. Webhooks/Manage webhook Settings  
 - Payload URL 작성
@@ -108,7 +108,7 @@ ex) http://j5a501.p.ssafy.io:8000/github-webhook/
 - Active 활성화
 - Update webhook 클릭
 
-###### Jenkins   
+##### Jenkins   
 1. 확인한 비밀번호로 접속 및 계정 생성  
 2. Jenkins 관리 -> 플러그인 관리 -> Docker Pipeline, Docker plugin, npm 설치  
 3. Jenkins 관리 -> Global Tool Configuration -> NodeJS v14.17.6  
