@@ -39,6 +39,7 @@ ex) http://j5a501.p.ssafy.io:8000/github-webhook/
 cd backend
 chmod 777 mvnw
 ./mvnw clean package
+sh dockerbuild.sh
 ```  
 
 ### Docker 자동 배포 (도커라이징)
