@@ -71,7 +71,7 @@ $ docker images
 $ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=ssafy --name surlock mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 ```
 
-5. Docker를 통한 Nginx 설치 (하지 않음)  
+5. Docker를 통한 Nginx 설치 (하지 않음)
 (1) Nginx 최신버전 설치 명령어
 ```
 $ sudo docker pull nginx:latest
@@ -97,7 +97,7 @@ $ docker logs [CONTAINER_NAME]
 # docker logs jenkins
 ```
 
-7. Jenkins와 Github의 webhook (자동 빌드) 설정 이후 docker로 자동 배포 과정  
+7. Jenkins와 Github의 webhook (자동 빌드) 설정 이후 docker로 자동 배포 과정 (도커라이징)
 (1) Dockerfile 생성
 ```
 FROM openjdk:8-alpine
@@ -109,14 +109,9 @@ ENTRYPOINT ["java", "-jar", "surlock.jar"]
 ```  
 (2) dockerbuild.sh 작성
 ```
-docker build -t surlock ./  
-
-# 기존 컨테이너 정지
-docker ps -f name=surlock  -q | xargs --no-run-if-empty docker container stop  
-
-# 기존 컨테이너 삭제
-docker container ls -a -f name=surlock -q | xargs -r docker container rm  
-
+docker build -t surlock ./
+docker ps -f name=surlock  -q | xargs --no-run-if-empty docker container stop
+docker container ls -a -f name=surlock -q | xargs -r docker container rm
 docker run -d -p 8080:8080 --name surlock surlock
 ```  
 (3) Jenkins 프로젝트 내 Execute shell
@@ -128,7 +123,7 @@ chmod 777 dockerbuild.sh
 sh dockerbuild.sh
 ```  
 
-8. EC2 서버 내 Nginx 설치 및 실행  
+8. EC2 서버 내 Nginx 설치 및 실행
 (0) Nginx 삭제
 ```
 $ sudo apt-get remove nginx
@@ -140,19 +135,17 @@ $ sudo apt-get install nginx
 ```  
 (2) Nginx 세팅
 ```
-$ cd /etc/nginx/sites-available
-$ sudo vi default 
-server {
-  listen 80;
-  location / {
-    root /var/jenkins/workspace/Sur-Lock/frontend/build;
-    index  index.html index.htm;
-    try_files $uri /index.html;
-  }
-}
-# 다른 내용 반드시 주석하기!
+# 설정 파일의 위치 찾기
+$ sudo find / -name nginx.conf
+$ sudo vi nginx.conf
+# 
+
 ```  
 (3) Nginx 실행
 ```
 $ sudo service nginx start
 ```
+
+
+/var/jenkins/workspace/Sur-Lock/frontend/build
+systemctl status nginx
