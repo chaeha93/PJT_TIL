@@ -1,5 +1,6 @@
 ## Docker & Jenkins를 이용한 Springboot 배포
-#### Docker를 통한 Jenkins 설치  
+<hr>
+### Docker를 통한 Jenkins 설치  
 1. Jenkins 도커 이미지 다운로드
 ```
 $ docker pull jenkins/jenkins
@@ -15,7 +16,7 @@ $ docker logs [CONTAINER_NAME]
 # docker logs jenkins
 ```  
 
-#### Jenkins-Github Webhook  (Github에 변동이 발생하면 자동 빌드)
+### Jenkins-Github Webhook  (Github에 변동이 발생하면 자동 빌드)
 ###### GitHub  
 1. Settings -> webhooks -> Addwebhook 클릭
 2. Webhooks/Manage webhook Settings  
@@ -44,7 +45,7 @@ chmod 777 dockerbuild.sh
 sh dockerbuild.sh
 ```  
 
-#### Docker 자동 배포 (도커라이징)
+### Docker 자동 배포 (도커라이징)
 1. backend 폴더 내 Dockerfile 생성
 ```
 FROM openjdk:8-alpine
