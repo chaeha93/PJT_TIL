@@ -10,7 +10,7 @@ $ java -version
 # javac -version
 ```  
 
-2. Maven 설치 (필요했던 과정이었을까?) 
+2. Maven 설치
 ```
 $ sudo apt update
 $ sudo apt install maven
@@ -92,6 +92,7 @@ $ docker pull jenkins/jenkins
 (2) Jenkins 컨테이너 실행
 ```
 $ docker run -d -p 8000:8080 --restart=always -v /var/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --name jenkins -u root jenkins/jenkins
+# -v /var/jenkins:/jenkins:/var/jenkins_home -> 리눅스의 /var/jenkins_home을 local의 /var/jenkins와 공유한다. (볼륨을 준다고 표현) 
 ```
 (3) Jenkins 비밀번호 확인
 ```
@@ -99,5 +100,28 @@ $ docker logs [CONTAINER_NAME]
 # docker logs jenkins
 ```
 
-
-
+7. Jenkins와 Github의 webhook (자동 빌드) 설정 이후 docker로 자동 배포 과정  
+(1) Dockerfile 생성
+```
+FROM openjdk:8-alpine
+VOLUME /tmp
+EXPOSE 8080
+ARG JAR_FILE=target/surlock-0.0.1-SNAPSHOT.jar
+ADD ${JAR_FILE} surlock.jar
+ENTRYPOINT ["java", "-jar", "surlock.jar"]
+```  
+(2) dockerbuild.sh 작성
+```
+docker build -t surlock ./
+docker ps -f name=surlock  -q | xargs --no-run-if-empty docker container stop
+docker container ls -a -f name=surlock -q | xargs -r docker container rm
+docker run -d -p 8080:8080 --name surlock surlock
+```  
+(3) Jenkins 프로젝트 Execute shell
+```
+cd backend
+chmod 777 mvnw
+./mvnw clean package
+chmod 777 dockerbuild.sh
+sh dockerbuild.sh
+```  

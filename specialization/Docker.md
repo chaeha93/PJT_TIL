@@ -13,7 +13,8 @@ $ docker container rm {컨테이너ID 앞 3자리}
 $ docker stop $(docker ps -a -q)
 # 모든 컨테이너 삭제
 $ docker rm $(docker ps -a -q)
-```  
+``` 
+  
 - Docker image
 ```
 # 현재 이미지 확인
