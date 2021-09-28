@@ -109,11 +109,14 @@ ENTRYPOINT ["java", "-jar", "surlock.jar"]
 ```  
 (2) dockerbuild.sh 작성
 ```
-docker build -t surlock ./
+docker build -t surlock ./  
+
 # 기존 컨테이너 정지
-docker ps -f name=surlock  -q | xargs --no-run-if-empty docker container stop
+docker ps -f name=surlock  -q | xargs --no-run-if-empty docker container stop  
+
 # 기존 컨테이너 삭제
-docker container ls -a -f name=surlock -q | xargs -r docker container rm
+docker container ls -a -f name=surlock -q | xargs -r docker container rm  
+
 docker run -d -p 8080:8080 --name surlock surlock
 ```  
 (3) Jenkins 프로젝트 내 Execute shell
