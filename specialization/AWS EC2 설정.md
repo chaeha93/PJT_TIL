@@ -123,7 +123,7 @@ chmod 777 dockerbuild.sh
 sh dockerbuild.sh
 ```  
 
-8. EC2 서버 내 Nginx 설치 및 실행
+8. EC2 서버 내 Nginx 설치 및 실행  
 (0) Nginx 삭제
 ```
 $ sudo apt-get remove nginx
