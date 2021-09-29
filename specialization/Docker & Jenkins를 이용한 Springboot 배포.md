@@ -54,10 +54,13 @@ ENTRYPOINT ["java", "-jar", "surlock.jar"]
 ```  
 2. backend 폴더 내 dockerbuild.sh 작성
 ```
-docker build -t surlock ./
+docker build -t surlock ./  
+
 # 기존 컨테이너 정지
-docker ps -f name=surlock  -q | xargs --no-run-if-empty docker container stop
+docker ps -f name=[컨테이너이름] -q | xargs --no-run-if-empty docker container stop  
+
 # 기존 컨테이너 삭제
-docker container ls -a -f name=surlock -q | xargs -r docker container rm
+docker container ls -a -f name=[컨테이너이름] -q | xargs -r docker container rm  
+
 docker run -d -p 8080:8080 --name surlock surlock
 ``` 
