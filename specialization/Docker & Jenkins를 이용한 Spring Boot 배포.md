@@ -1,4 +1,4 @@
-## Docker & Jenkins를 이용한 Springboot 배포  
+## Docker & Jenkins를 이용한 Spring Boot 배포  
 
 ### Docker를 통한 Jenkins 설치  
 1. Jenkins 도커 이미지 다운로드
