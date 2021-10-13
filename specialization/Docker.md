@@ -15,6 +15,8 @@ $ docker stop $(docker ps -a -q)
 $ docker rm $(docker ps -a -q)
 # 컨테이너 로그 확인
 docker logs {container name}
+# 컨테이너 시작
+$ sudo docker start {컨테이너ID}
 ``` 
   
 - Docker image

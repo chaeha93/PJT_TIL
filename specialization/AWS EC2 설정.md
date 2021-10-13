@@ -68,8 +68,14 @@ $ docker images
 ```
 3. MySQL Docker 컨테이너 생성 및 실행
 ``` 
-$ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=ssafy --name surlock mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+$ docker run --name mysql -e MYSQL_ROOT_PASSWORD=surlock -d -p 3306:3306 mysql:5.7
 ```
+4.  도커 컨테이너 MySQL 접속
+```
+$ docker exec -it {컨테이너 이름} /bin/bash
+#  mysql -u root -p
+> create database if not exists surlock
+``` 
 
 ### Docker를 통한 Nginx 설치 (하지 않음)
 1. Nginx 최신버전 설치 명령어
@@ -140,11 +146,9 @@ ENTRYPOINT ["java", "-jar", "surlock.jar"]
 docker build -t surlock ./  
 
 # 기존 컨테이너 정지 : docker ps -f name=[컨테이너이름] -q | xargs --no-run-if-empty docker container stop  
-
 docker ps -f name=surlock  -q | xargs --no-run-if-empty docker container stop  
 
 # 기존 컨테이너 삭제 : docker container ls -a -f name=[컨테이너이름] -q | xargs -r docker container rm  
-
 docker container ls -a -f name=surlock -q | xargs -r docker container rm  
 
 docker run -d -p 8080:8080 --name surlock surlock

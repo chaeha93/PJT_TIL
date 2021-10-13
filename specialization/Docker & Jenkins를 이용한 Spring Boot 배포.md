@@ -16,18 +16,7 @@ $ docker logs [CONTAINER_NAME]
 # docker logs jenkins
 ```  
 
-### Jenkins-Github Webhook  (Github에 변동이 발생하면 자동 빌드)
-###### GitHub  
-1. Settings -> webhooks -> Addwebhook 클릭
-2. Webhooks/Manage webhook Settings  
-- Payload URL 작성
-ex) http://j5a501.p.ssafy.io:8000/github-webhook/   
- __반드시 주소 뒤 '/github-webhook/'을 작성!!__
-- Content Type : application/json
-- Which events would you like to trigger this webhook? : 상황에 맞게 클릭
-- Active 활성화
-- Update webhook 클릭
-
+### Jenkins-Gitlab Webhook  (Gitlab에 변동이 발생하면 자동 빌드)
 ###### Jenkins   
 1. 확인한 비밀번호로 접속 및 계정 생성  
 2. Jenkins 관리 -> 플러그인 관리 -> Docker Pipeline, Docker plugin 설치  
@@ -56,11 +45,11 @@ ENTRYPOINT ["java", "-jar", "surlock.jar"]
 ```
 docker build -t surlock ./  
 
-# 기존 컨테이너 정지
-docker ps -f name=[컨테이너이름] -q | xargs --no-run-if-empty docker container stop  
+# 기존 컨테이너 정지 : docker ps -f name=[컨테이너이름] -q | xargs --no-run-if-empty docker container stop  
+docker ps -f name=surlock  -q | xargs --no-run-if-empty docker container stop  
 
-# 기존 컨테이너 삭제
-docker container ls -a -f name=[컨테이너이름] -q | xargs -r docker container rm  
+# 기존 컨테이너 삭제 : docker container ls -a -f name=[컨테이너이름] -q | xargs -r docker container rm  
+docker container ls -a -f name=surlock -q | xargs -r docker container rm  
 
 docker run -d -p 8080:8080 --name surlock surlock
-``` 
+```  
