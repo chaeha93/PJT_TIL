@@ -43,4 +43,9 @@ $ git checkout -- 파일 이름
 # git checkout -- pom
 ```  
 
+### Error: refusing to merge unrelated histories
+```
+$ git pull origin 브런치명 --allow-unrelated-histories
+```
+
 
