@@ -43,4 +43,9 @@ $ git checkout -- 파일 이름
 # git checkout -- pom
 ```  
 
+### git branch 'develop'을 Github에 올리기
+```
+$ git push -u origin develop
+``` 
+
 
