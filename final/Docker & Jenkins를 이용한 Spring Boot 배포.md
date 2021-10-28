@@ -10,7 +10,7 @@ $ docker pull jenkins/jenkins
 $ docker run -d -p 8000:8080 --restart=always -v /var/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --name jenkins -u root jenkins/jenkins
 # -v /var/jenkins:/jenkins:/var/jenkins_home -> 리눅스의 /var/jenkins_home을 local의 /var/jenkins와 공유한다. (볼륨을 준다고 표현) 
 # -v $(which docker):/usr/bin/docker -> 도커빌드sh 안에 도커 명령어가 상대 경로이기 때문에, 절대 경로로 넣은 후 패스 설정 후 실행하는 방법
-sh실행할때 실행하는 사용자(ubuntu) 프로파일을 가져오는게 아니라 젠킨스 프로파일을 가져오기 때문에 패스가 설정되어 있지 않아서 젠킨스에서 docker을 못 찾는 오류가 발생할 수 있음.
+셸 실행할 때, 실행하는 사용자(ubuntu) 프로파일을 가져오는게 아니라 젠킨스 프로파일을 가져오기 때문에 패스가 설정되어 있지 않아서 젠킨스에서 docker을 못 찾는 오류가 발생할 수 있음.
 ```
 3. Jenkins 비밀번호 확인
 ```
@@ -28,8 +28,9 @@ $ docker logs [CONTAINER_NAME]
 6. Build - Excute shell  
 ```
 cd backend
-chmod 777 mvnw
-./mvnw clean package
+chmod 777 gradlew
+./gradlew clean build
+chmod 777 dockerbuild.sh
 sh dockerbuild.sh
 ```  
 

@@ -7,13 +7,6 @@ $ sudo apt-get install openjdk-8-jdk
 $ java -version
 ```  
 
-### Maven 설치
-```
-$ sudo apt update
-$ sudo apt install maven
-$ mvn -version
-```  
-
 ### Docker 설치  
 참고 : https://docs.docker.com/engine/install/ubuntu/
 ```
@@ -54,7 +47,7 @@ $ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docke
 $ sudo chmod +x /usr/local/bin/docker-compose
 # 설치를 테스트
 $ docker-compose --version
-```
+```  
 
 ### Docker를 통한 MySQL 5.7 버전 설치  
 참고 : http://jmlim.github.io/docker/2019/07/30/docker-mysql-setup/  
@@ -74,18 +67,9 @@ $ docker run --name mysql -e MYSQL_ROOT_PASSWORD=surlock -d -p 3306:3306 mysql:5
 ```
 $ docker exec -it {컨테이너 이름} /bin/bash
 #  mysql -u root -p
-> create database if not exists surlock collate utf8mb4_general_ci;
-``` 
+> create database if not exists linkflix collate utf8mb4_general_ci;
+```  
 
-### Docker를 통한 Nginx 설치 (하지 않음)
-1. Nginx 최신버전 설치 명령어
-```
-$ sudo docker pull nginx:latest
-```
-2. 실행
-```
-$ docker run --name nginx-test -v /home/mint/share/nginx/html:/usr/share/nginx/html:ro -d -p 80:80 nginx
-```
 ### Docker를 통한 Jenkins 설치  
 1. Jenkins 도커 이미지 다운로드
 ```
@@ -93,14 +77,16 @@ $ docker pull jenkins/jenkins
 ```  
 2. Jenkins 컨테이너 실행
 ```
-$ docker run -d -p 8000:8080 --restart=always -v /var/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --name jenkins -u root jenkins/jenkins
+$ docker run -d -p 8000:8080 --restart=always -v /var/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --name jenkins -u root jenkins/jenkins
 # -v /var/jenkins:/jenkins:/var/jenkins_home -> 리눅스의 /var/jenkins_home을 local의 /var/jenkins와 공유한다. (볼륨을 준다고 표현) 
+# -v $(which docker):/usr/bin/docker -> 도커빌드sh 안에 도커 명령어가 상대 경로이기 때문에, 절대 경로로 넣은 후 패스 설정 후 실행하는 방법
+셸 실행할 때, 실행하는 사용자(ubuntu) 프로파일을 가져오는게 아니라 젠킨스 프로파일을 가져오기 때문에 패스가 설정되어 있지 않아서 젠킨스에서 docker을 못 찾는 오류가 발생할 수 있음.
 ```
 3. Jenkins 비밀번호 확인
 ```
 $ docker logs [CONTAINER_NAME]
 # docker logs jenkins
-```  
+```   
 
 ### Jenkins-Github Webhook  (Github에 변동이 발생하면 자동 빌드)
 ##### GitHub  
@@ -125,8 +111,8 @@ ex) http://j5a501.p.ssafy.io:8000/github-webhook/
 8. Build - Excute shell  
 ```
 cd backend
-chmod 777 mvnw
-./mvnw clean package
+chmod 777 gradlew
+./gradlew clean build
 chmod 777 dockerbuild.sh
 sh dockerbuild.sh
 ```  
@@ -135,47 +121,17 @@ sh dockerbuild.sh
 1. backend 폴더 내 Dockerfile 생성
 ```
 FROM openjdk:8-alpine
+## LABEL maintainer="chaeha93@gmail.com"
 VOLUME /tmp
 EXPOSE 8080
-ARG JAR_FILE=target/surlock-0.0.1-SNAPSHOT.jar
-ADD ${JAR_FILE} surlock.jar
-ENTRYPOINT ["java", "-jar", "surlock.jar"]
+ARG JAR_FILE=build/libs/linkflix-0.0.1-SNAPSHOT.jar
+ADD ${JAR_FILE} linkflix.jar
+ENTRYPOINT ["java", "-jar", "linkflix.jar"]
 ```  
 2. backend 폴더 내 dockerbuild.sh 작성
 ```
-docker build -t surlock ./  
-
-# 기존 컨테이너 정지 : docker ps -f name=[컨테이너이름] -q | xargs --no-run-if-empty docker container stop  
-docker ps -f name=surlock  -q | xargs --no-run-if-empty docker container stop  
-
-# 기존 컨테이너 삭제 : docker container ls -a -f name=[컨테이너이름] -q | xargs -r docker container rm  
-docker container ls -a -f name=surlock -q | xargs -r docker container rm  
-
-docker run -d -p 8080:8080 --name surlock surlock
+docker build -t linkflix ./
+docker ps -f name=linkflix  -q | xargs --no-run-if-empty docker container stop
+docker container ls -a -f name=linkflix -q | xargs -r docker container rm
+docker run -d -p 8080:8080 -v /home/ubuntu/product_images:/product_images --name linkflix linkflix
 ```  
-
-### EC2 서버 내 Nginx 설치 및 실행
-1. Nginx 설치
-```
-$ sudo apt-get update
-$ sudo apt-get install nginx
-```  
-2. Nginx 세팅
-```
-# 설정 파일의 위치 찾기
-$ cd /etc/nginx/sites-available
-$ sudo vi default
-server {
-  listen 80;
-  location / {
-    root /var/jenkins/workspace/Sur-Lock/frontend/build;
-    index  index.html index.htm;
-    try_files $uri /index.html;
-  }
-}
-# 이 외 default 내용은 주석 처리 or 지워야함. 
-```  
-(3) Nginx 실행
-```
-$ sudo service nginx start
-```
