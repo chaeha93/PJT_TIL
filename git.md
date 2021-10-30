@@ -46,6 +46,10 @@ $ git checkout -- 파일 이름
 ### git branch 'develop'을 Github에 올리기
 ```
 $ git push -u origin develop
-``` 
+```   
 
-
+### git 'cannot lock ref' 에러
+```
+$ git gc --prune=now
+$ git remote prune origin
+```

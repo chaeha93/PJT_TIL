@@ -135,3 +135,37 @@ docker ps -f name=linkflix  -q | xargs --no-run-if-empty docker container stop
 docker container ls -a -f name=linkflix -q | xargs -r docker container rm
 docker run -d -p 8080:8080 -v /home/ubuntu/product_images:/product_images --name linkflix linkflix
 ```  
+
+3. crawl 폴더 내 Dockerfile 생성  
+```
+FROM python:3.9
+
+# set a directory for the app
+WORKDIR /app
+
+# copy all the files to the container
+COPY . .
+
+# 필요한 의존성 file 설치
+RUN pip install -r requirements.txt
+
+# tell the port number the container should expose
+EXPOSE 5000
+
+# container가 구동되면 실행
+ENTRYPOINT ["python", "app.py"]
+```  
+
+4. crawl 폴더 내 dockerbuild.sh 작성  
+```
+docker container stop flask
+docker container rm flask
+docker build -t flask ./
+docker run --name flask -d -p 5000:5000 flask
+```  
+
+### 파이썬 설치
+```
+sudo apt install python
+python --version
+```
