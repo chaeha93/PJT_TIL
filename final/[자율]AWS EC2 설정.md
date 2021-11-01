@@ -168,4 +168,30 @@ docker run --name flask -d -p 5000:5000 flask
 ```
 sudo apt install python
 python --version
+```  
+
+### https 인증  
+1. Nginx 설치
 ```
+sudo apt-get update
+sudo apt-get install -y build-essential
+sudo apt-get install -y nodejs
+sudo apt-get install -y nginx
+```  
+
+2. letsencrypt
+[참고] https://velog.io/@teveloper/nginx-nginx%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%B4-AWS-EC2%EC%97%90-https-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-%EB%AC%B4%EB%A3%8C-SSL-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89
+```
+git clone https://github.com/letsencrypt/letsencrypt
+sudo apt install certbot
+sudo letsencrypt certonly --standalone -d k5a104.p.ssafy.io
+
+Error : Cleaning up challenges Problem binding to port 80: Could not bind to IPv4 or IPv6. >>
+netstat -anp | grep 80
+kill -9 (PID)
+# nginx 재시작
+sudo nginx -t
+sudo systemctl restart nginx
+``` 
+
+
