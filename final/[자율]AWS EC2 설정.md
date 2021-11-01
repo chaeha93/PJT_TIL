@@ -179,7 +179,7 @@ sudo apt-get install -y nodejs
 sudo apt-get install -y nginx
 ```  
 
-2. letsencrypt
+2. letsencrypt  
 [참고] https://velog.io/@teveloper/nginx-nginx%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%B4-AWS-EC2%EC%97%90-https-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-%EB%AC%B4%EB%A3%8C-SSL-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89
 ```
 git clone https://github.com/letsencrypt/letsencrypt
