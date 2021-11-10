@@ -75,17 +75,8 @@ $ docker run --name mysql -e MYSQL_ROOT_PASSWORD=surlock -d -p 3306:3306 mysql:5
 $ docker exec -it {컨테이너 이름} /bin/bash
 #  mysql -u root -p
 > create database if not exists surlock collate utf8mb4_general_ci;
-``` 
+```  
 
-### Docker를 통한 Nginx 설치 (하지 않음)
-1. Nginx 최신버전 설치 명령어
-```
-$ sudo docker pull nginx:latest
-```
-2. 실행
-```
-$ docker run --name nginx-test -v /home/mint/share/nginx/html:/usr/share/nginx/html:ro -d -p 80:80 nginx
-```
 ### Docker를 통한 Jenkins 설치  
 1. Jenkins 도커 이미지 다운로드
 ```
@@ -178,4 +169,5 @@ server {
 (3) Nginx 실행
 ```
 $ sudo service nginx start
+$ sudo service nginx restart
 ```

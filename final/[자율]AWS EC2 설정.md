@@ -100,10 +100,11 @@ ex) http://j5a501.p.ssafy.io:8000/github-webhook/
 - Active 활성화
 - Update webhook 클릭
 
-##### Jenkins   
+##### Jenkins  
+[참고] https://smoh.tistory.com/333   
 1. 확인한 비밀번호로 접속 및 계정 생성  
 2. Jenkins 관리 -> 플러그인 관리 -> Docker Pipeline, Docker plugin, npm 설치  
-3. Jenkins 관리 -> Global Tool Configuration -> NodeJS v14.17.6  
+3. Jenkins 관리 -> Global Tool Configuration -> NodeJS v14.17.5  
 4. 새로운 item -> Freestyle project 생성  
 5. 소스 코드 관리에서 Git 선택 후 Repository URL 작성과 Credentials Add 후 선택  
 6. 빌드 유발 - GitHub hook trigger for GITScm polling 선택  
@@ -115,6 +116,12 @@ chmod 777 gradlew
 ./gradlew clean build
 chmod 777 dockerbuild.sh
 sh dockerbuild.sh
+cd ../crawl
+chmod 777 dockerbuild.sh
+sh dockerbuild.sh
+cd ../frontend
+npm install
+npm run build
 ```  
 
 ### Docker 자동 배포 (도커라이징)
@@ -135,7 +142,6 @@ docker ps -f name=linkflix  -q | xargs --no-run-if-empty docker container stop
 docker container ls -a -f name=linkflix -q | xargs -r docker container rm
 docker run -d -p 8080:8080 -v /home/ubuntu/product_images:/product_images --name linkflix linkflix
 ```  
-
 3. crawl 폴더 내 Dockerfile 생성  
 ```
 FROM python:3.9
@@ -155,7 +161,6 @@ EXPOSE 5000
 # container가 구동되면 실행
 ENTRYPOINT ["python", "app.py"]
 ```  
-
 4. crawl 폴더 내 dockerbuild.sh 작성  
 ```
 docker container stop flask
@@ -178,7 +183,6 @@ sudo apt-get install -y build-essential
 sudo apt-get install -y nodejs
 sudo apt-get install -y nginx
 ```  
-
 2. letsencrypt  
 [참고] https://velog.io/@teveloper/nginx-nginx%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%B4-AWS-EC2%EC%97%90-https-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-%EB%AC%B4%EB%A3%8C-SSL-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89
 ```
@@ -192,6 +196,20 @@ kill -9 (PID)
 # nginx 재시작
 sudo nginx -t
 sudo systemctl restart nginx
-``` 
+```   
+3. nginx.conf 설정  
+```
+$ sudo vi /etc/nginx/nginx.conf
+```  
+4. nginx 실행  
+```
+$ sudo service nginx start
+$ sudo service nginx restart
+```  
+5. ngnix 에러 로그 보기
+```
+$ sudo tail -F /var/log/nginx/error.log
+```  
+
 
 
