@@ -119,7 +119,7 @@ sh dockerbuild.sh
 cd ../crawl
 chmod 777 dockerbuild.sh
 sh dockerbuild.sh
-cd ../frontend
+cd ../landingpage
 npm install
 npm run build
 ```  
@@ -200,6 +200,74 @@ sudo systemctl restart nginx
 3. nginx.conf 설정  
 ```
 $ sudo vi /etc/nginx/nginx.conf
+
+# HTTPS server
+    server {
+        listen       8081 ssl;
+        server_name  k5a104.p.ssafy.io;
+
+        ssl_certificate      /etc/letsencrypt/live/k5a104.p.ssafy.io/fullchain.pem;
+        ssl_certificate_key  /etc/letsencrypt/live/k5a104.p.ssafy.io/privkey.pem;
+        ssl_session_cache    shared:SSL:1m;
+        ssl_session_timeout  5m;
+
+        location / {
+             proxy_set_header X-Forwarded-For             $proxy_add_x_forwarded_for;
+             proxy_set_header X-Forwarded-Proto https;
+             proxy_set_header X-Real-IP $remote_addr;
+             proxy_set_header HOST $http_host;
+             proxy_set_header X-NginX-Proxy true;
+
+             proxy_pass http://127.0.0.1:8080;
+             proxy_redirect off;
+        }
+    }
+
+    server {
+        listen       5001 ssl;
+        server_name  k5a104.p.ssafy.io;
+
+        ssl_certificate     /etc/letsencrypt/live/k5a104.p.ssafy.io/fullchain.pem;
+        ssl_certificate_key  /etc/letsencrypt/live/k5a104.p.ssafy.io/privkey.pem;
+        ssl_session_cache    shared:SSL:1m;
+        ssl_session_timeout  5m;
+
+        location / {
+             proxy_set_header X-Forwarded-For             $proxy_add_x_forwarded_for;
+             proxy_set_header X-Forwarded-Proto https;
+             proxy_set_header X-Real-IP $remote_addr;
+             proxy_set_header HOST $http_host;
+             proxy_set_header X-NginX-Proxy true;
+
+             proxy_pass http://127.0.0.1:5000;
+             proxy_redirect off;
+        }
+    }
+  
+    server {
+        listen      80;
+        server_name k5a104.p.ssafy.io;
+
+        return 301 https://$host$request_uri;
+    }
+
+
+      server {
+        listen  443 ssl;
+        server_name  k5a104.p.ssafy.io;
+
+        ssl_certificate     /etc/letsencrypt/live/k5a104.p.ssafy.io/fullchain.pem;
+        ssl_certificate_key  /etc/letsencrypt/live/k5a104.p.ssafy.io/privkey.pem;
+        ssl_session_cache    shared:SSL:1m;
+        ssl_session_timeout  5m;
+
+        location / {
+             root /var/jenkins/workspace/LINKFLIX/landingpage/dist;
+             index index.html;
+             try_files $uri /index.html;
+        }
+    }
+
 ```  
 4. nginx 실행  
 ```
