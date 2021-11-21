@@ -52,4 +52,20 @@ $ git push -u origin develop
 ```
 $ git gc --prune=now
 $ git remote prune origin
+```  
+
+### Gitlab에서 Github로 commit log를 유지하여 Clone
+[참고] https://xtring-dev.tistory.com/28
+- 100MB가 넘는 크기의 파일을 지닌 저장소 미러링
+1. 복사하고자 하는 저장소(Gitlab)의 clone을 생성
 ```
+$ git clone --mirror https://gitlab.com/{주소}.git
+```    
+2. 커밋 히스토리 내에서 Large file을 찾아 tracking
+```
+$ git filter-branch --tree-filter 'git lfs track "*.{zip,jar}"' -- --all
+```    
+3. 새로운 저장소(Github)으로 mirror-push를 진행
+```
+$ git push --mirror https://github.com/{주소}.git
+```  
