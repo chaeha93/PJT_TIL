@@ -17,6 +17,8 @@ $ docker rm $(docker ps -a -q)
 docker logs {container name}
 # 컨테이너 시작
 $ sudo docker start {컨테이너ID}
+# 중지된 모든 컨테이너 일괄 삭제
+$ docker container prune
 ``` 
   
 - Docker image
