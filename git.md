@@ -37,6 +37,13 @@ git push origin main -f
 git pull origin 브런치명 --allow-unrelated-histories
 ```  
 
+### git 강제 pull
+```
+git fetch --all
+git reset --hard origin/<브랜치명>
+git pull origin develop
+```  
+
 ### git status에서 특정 파일 modfied(변경사항) 되돌리기
 ```
 $ git checkout -- 파일 이름
