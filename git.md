@@ -41,7 +41,7 @@ git pull origin 브런치명 --allow-unrelated-histories
 ```
 git fetch --all
 git reset --hard origin/<브랜치명>
-git pull origin develop
+git pull origin <브랜치명>
 ```  
 
 ### git status에서 특정 파일 modfied(변경사항) 되돌리기
