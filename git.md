@@ -76,3 +76,17 @@ $ git filter-branch --tree-filter 'git lfs track "*.{zip,jar}"' -- --all
 ```
 $ git push --mirror https://github.com/{주소}.git
 ```  
+
+### git reset
+[참고] http://www.devpools.kr/2017/02/05/%EC%B4%88%EB%B3%B4%EC%9A%A9-git-%EB%90%98%EB%8F%8C%EB%A6%AC%EA%B8%B0-reset-revert/
+- 돌아가려는 커밋으로 재설정되고, 해당 커밋 이후의 이력은 사라진다.  
+```
+(1) hard: 돌아가려는 이력 이후의 모든 내용을 지운다.
+$ git reset --hard <커밋 고유 번호>
+
+(2) soft: 돌아가려한 이력으로 되돌아가지만, 이후의 내용은 지워지지 않는다.
+$ git reset --soft <커밋 고유 번호>
+
+(3) mixed(default): 이력은 되돌아가며 이후 변경된 내용에 대해서는 남아있지만, 인덱스는 초기화된다.
+$ git reset --mixed <커밋 고유 번호>
+```  
